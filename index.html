@@ -1,0 +1,448 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Mirador de la Isla · Carta accesible</title>
+<meta name="description" content="Carta accesible por voz del restaurante Mirador de la Isla.">
+<style>
+:root {
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  color-scheme: light dark;
+}
+body {
+  margin: 0;
+  line-height: 1.55;
+  background: Canvas;
+  color: CanvasText;
+}
+.wrap {
+  max-width: 52rem;
+  margin: 0 auto;
+  padding: 1.25rem;
+}
+.skip-link {
+  position: absolute;
+  left: -9999px;
+  top: 0;
+}
+.skip-link:focus {
+  left: 1rem;
+  top: 1rem;
+  z-index: 999;
+  padding: .75rem 1rem;
+  background: Canvas;
+  color: CanvasText;
+  border: 2px solid currentColor;
+}
+h1, h2 { line-height: 1.2; }
+.intro {
+  font-size: 1.1rem;
+  max-width: 44rem;
+}
+.panel {
+  border: 2px solid currentColor;
+  border-radius: 1rem;
+  padding: 1rem;
+  margin: 1rem 0 1.5rem;
+}
+.controls {
+  display: grid;
+  gap: .75rem;
+}
+button {
+  font: inherit;
+  font-weight: 700;
+  min-height: 3.25rem;
+  padding: .8rem 1rem;
+  border: 2px solid currentColor;
+  border-radius: .75rem;
+  background: ButtonFace;
+  color: ButtonText;
+  cursor: pointer;
+  text-align: left;
+}
+button:focus-visible, a:focus-visible {
+  outline: 4px solid Highlight;
+  outline-offset: 3px;
+}
+.status {
+  min-height: 2rem;
+  padding-top: .75rem;
+  font-weight: 700;
+}
+.hint {
+  font-size: .98rem;
+}
+.menu-section {
+  margin: 2rem 0;
+}
+.dish-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+.dish-list li {
+  display: flex;
+  gap: 1rem;
+  justify-content: space-between;
+  border-bottom: 1px solid currentColor;
+  padding: .65rem 0;
+}
+.price {
+  white-space: nowrap;
+  font-weight: 700;
+}
+.sr-only {
+  position: absolute !important;
+  width: 1px !important;
+  height: 1px !important;
+  padding: 0 !important;
+  margin: -1px !important;
+  overflow: hidden !important;
+  clip: rect(0, 0, 0, 0) !important;
+  white-space: nowrap !important;
+  border: 0 !important;
+}
+@media (prefers-reduced-motion: reduce) {
+  * { scroll-behavior: auto !important; }
+}
+</style>
+</head>
+<body>
+<a class="skip-link" href="#contenido">Saltar al contenido de la carta</a>
+
+<main id="contenido" class="wrap">
+<h1>Mirador de la Isla · Carta accesible</h1>
+
+<p class="intro">
+Puedes escuchar la carta con los botones o activar el control por voz.
+La página también está preparada para lectores de pantalla y navegación por teclado.
+</p>
+
+<section class="panel" aria-labelledby="voz-titulo">
+<h2 id="voz-titulo">Control por voz</h2>
+<p>
+Por privacidad, el navegador necesita tu permiso para usar el micrófono.
+Pulsa una vez <strong>“Activar control por voz”</strong>. Después podrás decir
+“carta completa”, “pescado frito”, “pescado a la plancha”, “carnes a la brasa”,
+“repetir opciones”, “ayuda” o “parar”.
+</p>
+
+<div class="controls" aria-label="Controles principales">
+<button type="button" id="voice-toggle" aria-pressed="false">
+Activar control por voz
+</button>
+<button type="button" data-speak="full">Escuchar carta completa</button>
+<button type="button" data-speak="fried">Escuchar pescado frito</button>
+<button type="button" data-speak="grilled">Escuchar pescado a la plancha</button>
+<button type="button" data-speak="meat">Escuchar carnes a la brasa</button>
+<button type="button" id="stop">Parar lectura</button>
+</div>
+
+<p id="status" class="status" role="status" aria-live="polite">
+Control por voz desactivado.
+</p>
+<p id="compat" class="hint"></p>
+</section>
+
+<section class="menu-section" id="pescado-frito" aria-labelledby="titulo-frito">
+<h2 id="titulo-frito">Pescado frito</h2>
+<ul class="dish-list">
+<li><span>Chocos</span><span class="price">14 €</span></li>
+<li><span>Boquerones</span><span class="price">14 €</span></li>
+<li><span>Pijotas</span><span class="price">14 €</span></li>
+<li><span>Acedías</span><span class="price">14 €</span></li>
+<li><span>Puntillitas</span><span class="price">14 €</span></li>
+<li><span>Cazón en adobo</span><span class="price">14 €</span></li>
+<li><span>Araña en adobo</span><span class="price">14 €</span></li>
+<li><span>Fritura variada para dos personas</span><span class="price">32 €</span></li>
+<li><span>Tortillitas de camarones</span><span class="price">14 €</span></li>
+</ul>
+</section>
+
+<section class="menu-section" id="pescado-plancha" aria-labelledby="titulo-plancha">
+<h2 id="titulo-plancha">Pescado a la plancha</h2>
+<ul class="dish-list">
+<li><span>Chocos</span><span class="price">14 €</span></li>
+<li><span>Chipirones</span><span class="price">14 €</span></li>
+<li><span>Pez espada</span><span class="price">16 €</span></li>
+<li><span>Atún</span><span class="price">16 €</span></li>
+<li><span>Salmón</span><span class="price">18 €</span></li>
+<li><span>Dorada</span><span class="price">21 €</span></li>
+<li><span>Lubina</span><span class="price">21 €</span></li>
+<li><span>Ventresca de atún</span><span class="price">20 €</span></li>
+<li><span>Lenguado</span><span class="price">24 €</span></li>
+</ul>
+</section>
+
+<section class="menu-section" id="carnes" aria-labelledby="titulo-carnes">
+<h2 id="titulo-carnes">Carnes a la brasa</h2>
+<ul class="dish-list">
+<li><span>Lagarto ibérico</span><span class="price">20 €</span></li>
+<li><span>Presa ibérica</span><span class="price">20 €</span></li>
+<li><span>Lomo de cerdo</span><span class="price">12 €</span></li>
+<li><span>Entrecot de ternera</span><span class="price">24 €</span></li>
+<li><span>Solomillo de ternera</span><span class="price">24 €</span></li>
+<li><span>Chuletitas de cordero</span><span class="price">21 €</span></li>
+<li><span>Pechuga de pollo</span><span class="price">12 €</span></li>
+<li><span>Pechuga de pollo empanada</span><span class="price">12 €</span></li>
+<li><span>Carrillada ibérica al Pedro Ximénez</span><span class="price">14 €</span></li>
+<li><span>Parrillada de carne</span><span class="price">43 €</span></li>
+</ul>
+</section>
+
+<p class="hint">
+Precios transcritos de la fotografía facilitada. Conviene revisarlos antes de publicar la versión definitiva.
+</p>
+</main>
+
+<script>
+(() => {
+  const status = document.getElementById('status');
+  const compat = document.getElementById('compat');
+  const voiceToggle = document.getElementById('voice-toggle');
+  const stopButton = document.getElementById('stop');
+
+  const menu = {
+    fried: [
+      ['Chocos', '14 euros'],
+      ['Boquerones', '14 euros'],
+      ['Pijotas', '14 euros'],
+      ['Acedías', '14 euros'],
+      ['Puntillitas', '14 euros'],
+      ['Cazón en adobo', '14 euros'],
+      ['Araña en adobo', '14 euros'],
+      ['Fritura variada para dos personas', '32 euros'],
+      ['Tortillitas de camarones', '14 euros']
+    ],
+    grilled: [
+      ['Chocos', '14 euros'],
+      ['Chipirones', '14 euros'],
+      ['Pez espada', '16 euros'],
+      ['Atún', '16 euros'],
+      ['Salmón', '18 euros'],
+      ['Dorada', '21 euros'],
+      ['Lubina', '21 euros'],
+      ['Ventresca de atún', '20 euros'],
+      ['Lenguado', '24 euros']
+    ],
+    meat: [
+      ['Lagarto ibérico', '20 euros'],
+      ['Presa ibérica', '20 euros'],
+      ['Lomo de cerdo', '12 euros'],
+      ['Entrecot de ternera', '24 euros'],
+      ['Solomillo de ternera', '24 euros'],
+      ['Chuletitas de cordero', '21 euros'],
+      ['Pechuga de pollo', '12 euros'],
+      ['Pechuga de pollo empanada', '12 euros'],
+      ['Carrillada ibérica al Pedro Ximénez', '14 euros'],
+      ['Parrillada de carne', '43 euros']
+    ]
+  };
+
+  const sectionNames = {
+    fried: 'Pescado frito',
+    grilled: 'Pescado a la plancha',
+    meat: 'Carnes a la brasa'
+  };
+
+  const optionsText =
+    'Opciones disponibles. Di: carta completa; pescado frito; pescado a la plancha; carnes a la brasa; repetir opciones; ayuda; o parar.';
+
+  function sectionText(key) {
+    const items = menu[key].map(([name, price]) => `${name}, ${price}.`).join(' ');
+    return `${sectionNames[key]}. ${items}`;
+  }
+
+  function getText(key) {
+    if (key === 'full') {
+      return `Carta del Mirador de la Isla. ${sectionText('fried')} ${sectionText('grilled')} ${sectionText('meat')}`;
+    }
+    return sectionText(key);
+  }
+
+  function speak(text, after) {
+    if (!('speechSynthesis' in window)) {
+      status.textContent = 'Este navegador no ofrece síntesis de voz integrada.';
+      return;
+    }
+
+    window.speechSynthesis.cancel();
+    const u = new SpeechSynthesisUtterance(text);
+    u.lang = 'es-ES';
+    u.rate = 0.92;
+
+    u.onstart = () => status.textContent = 'Leyendo en voz alta.';
+    u.onend = () => {
+      status.textContent = voiceEnabled
+        ? 'Control por voz activo. Puedes dar una orden.'
+        : 'Lectura terminada.';
+      if (typeof after === 'function') after();
+    };
+    u.onerror = () => status.textContent = 'No se pudo completar la lectura por voz.';
+
+    window.speechSynthesis.speak(u);
+  }
+
+  document.querySelectorAll('[data-speak]').forEach(btn => {
+    btn.addEventListener('click', () => speak(getText(btn.dataset.speak)));
+  });
+
+  stopButton.addEventListener('click', () => {
+    if ('speechSynthesis' in window) window.speechSynthesis.cancel();
+    if (recognition) {
+      try { recognition.stop(); } catch (_) {}
+    }
+    status.textContent = voiceEnabled
+      ? 'Lectura detenida. Control por voz activo.'
+      : 'Lectura detenida.';
+  });
+
+  const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
+  let recognition = null;
+  let voiceEnabled = false;
+  let listening = false;
+
+  if (!SpeechRecognition) {
+    voiceToggle.disabled = true;
+    voiceToggle.textContent = 'Control por voz no disponible en este navegador';
+    compat.textContent =
+      'Puedes seguir usando todos los botones, el teclado y un lector de pantalla. Para el control por voz integrado, prueba un navegador compatible con reconocimiento de voz.';
+    return;
+  }
+
+  recognition = new SpeechRecognition();
+  recognition.lang = 'es-ES';
+  recognition.continuous = false;
+  recognition.interimResults = false;
+  recognition.maxAlternatives = 3;
+
+  function normalize(s) {
+    return s.toLowerCase()
+      .normalize('NFD')
+      .replace(/[\u0300-\u036f]/g, '')
+      .replace(/[^\p{L}\p{N}\s]/gu, ' ')
+      .replace(/\s+/g, ' ')
+      .trim();
+  }
+
+  function restartListening() {
+    if (!voiceEnabled || listening || window.speechSynthesis.speaking) return;
+    try { recognition.start(); } catch (_) {}
+  }
+
+  function handleCommand(raw) {
+    const command = normalize(raw);
+    status.textContent = `Orden escuchada: ${raw}`;
+
+    if (command.includes('carta completa') || command === 'carta') {
+      speak(getText('full'), restartListening);
+      return;
+    }
+
+    if (command.includes('pescado frito') || command.includes('frito')) {
+      speak(getText('fried'), restartListening);
+      return;
+    }
+
+    if (command.includes('pescado a la plancha') ||
+        command.includes('pescado plancha') ||
+        command.includes('plancha')) {
+      speak(getText('grilled'), restartListening);
+      return;
+    }
+
+    if (command.includes('carne') ||
+        command.includes('carnes') ||
+        command.includes('brasa')) {
+      speak(getText('meat'), restartListening);
+      return;
+    }
+
+    if (command.includes('opciones') || command.includes('repetir')) {
+      speak(optionsText, restartListening);
+      return;
+    }
+
+    if (command.includes('ayuda')) {
+      speak(
+        'Ayuda. ' + optionsText +
+        ' También puedes usar los botones de la página con teclado o lector de pantalla.',
+        restartListening
+      );
+      return;
+    }
+
+    if (command.includes('parar') ||
+        command.includes('detener') ||
+        command.includes('silencio')) {
+      if ('speechSynthesis' in window) window.speechSynthesis.cancel();
+      status.textContent = 'Lectura detenida. Puedes dar otra orden.';
+      setTimeout(restartListening, 350);
+      return;
+    }
+
+    speak('No he entendido la orden. ' + optionsText, restartListening);
+  }
+
+  recognition.onstart = () => {
+    listening = true;
+    status.textContent = 'Escuchando. Puedes dar una orden.';
+  };
+
+  recognition.onend = () => {
+    listening = false;
+    if (voiceEnabled && !window.speechSynthesis.speaking) {
+      setTimeout(restartListening, 500);
+    }
+  };
+
+  recognition.onerror = (event) => {
+    listening = false;
+
+    if (event.error === 'not-allowed' || event.error === 'service-not-allowed') {
+      voiceEnabled = false;
+      voiceToggle.setAttribute('aria-pressed', 'false');
+      voiceToggle.textContent = 'Activar control por voz';
+      status.textContent = 'El navegador no ha concedido permiso para usar el micrófono.';
+      return;
+    }
+
+    if (event.error === 'no-speech') {
+      status.textContent = 'No he oído ninguna orden. Sigo escuchando.';
+    } else {
+      status.textContent = `Error de reconocimiento de voz: ${event.error}.`;
+    }
+  };
+
+  recognition.onresult = (event) => {
+    const transcript = event.results[event.results.length - 1][0].transcript;
+    handleCommand(transcript);
+  };
+
+  voiceToggle.addEventListener('click', () => {
+    voiceEnabled = !voiceEnabled;
+    voiceToggle.setAttribute('aria-pressed', String(voiceEnabled));
+
+    if (voiceEnabled) {
+      voiceToggle.textContent = 'Desactivar control por voz';
+      speak(
+        'Control por voz activado. ' + optionsText,
+        restartListening
+      );
+    } else {
+      voiceToggle.textContent = 'Activar control por voz';
+      if (recognition) {
+        try { recognition.stop(); } catch (_) {}
+      }
+      status.textContent = 'Control por voz desactivado.';
+    }
+  });
+
+  compat.textContent =
+    'El control por voz depende del reconocimiento de voz que ofrezca el navegador. La lectura mediante botones sigue disponible aunque el reconocimiento no lo esté.';
+})();
+</script>
+</body>
+</html>
